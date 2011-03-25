@@ -12,6 +12,7 @@
 	<property name="jboss.server.config" value="default" />
 
 	<target name="web-war" description="创建WEB发布包" depends="clean">
+		<delete file="${basedir}\EJBTest.war" />
 	    <war warfile="${basedir}\EJBTest.war" webxml="${resouce.dir}\WEB-INF\web.xml">
 	      <fileset dir="${resouce.dir}">
 	        <include name="**/*"/>
