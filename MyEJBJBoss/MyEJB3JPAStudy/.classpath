@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/activation.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/antlr.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/avalon-framework.jar"/>
@@ -23,7 +21,6 @@
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jaxb-xjc.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jaxws-rt.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jaxws-tools.jar"/>
-	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jbossall-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-annotations-ejb3.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-aop-jdk50-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-aspect-jdk50-client.jar"/>
@@ -31,7 +28,6 @@
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-common-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jbosscx-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-deployment.jar"/>
-	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-ejb3-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-ejb3x.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jbossha-client.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-iiop-client.jar"/>
@@ -70,5 +66,9 @@
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/wstx.jar"/>
 	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/xmlsec.jar"/>
+	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jboss-ejb3-client.jar"/>
+	<classpathentry kind="lib" path="E:/wypsmall/Develop/jboss-4.2.2.GA/client/jbossall-client.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyEJB3JPAStudyPo"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MyEJB3JPAStudyInterface"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
