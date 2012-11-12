@@ -3,6 +3,6 @@
   type="EJB"
   name="MyEJB3JPAStudyPo"
   id="myeclipse.1352450185078"
-  j2ee-spec="1.4"
+  j2ee-spec="5.0"
   archive="MyEJB3JPAStudyPo.jar" />
 
