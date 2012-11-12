@@ -1,5 +1,7 @@
 【事务控制】
 
+【对于Dao只提供local接口，不提供remote】
+
 【db2中char做主键的OneToMany问题】
 假设order表中有tradeno是char(16)，trans表中也该字段与之形成外键关联，但是不在表结构中体现
 order 1-n trans

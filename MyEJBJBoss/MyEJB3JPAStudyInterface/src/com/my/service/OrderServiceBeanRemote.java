@@ -1,0 +1,9 @@
+package com.my.service;
+
+import java.util.Map;
+import javax.ejb.Remote;
+
+@Remote
+public interface OrderServiceBeanRemote{
+	public void saveOrder(Map<String, String> data);
+}

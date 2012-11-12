@@ -1,11 +1,9 @@
 package com.my.dao.local;
 
 import javax.ejb.Local;
-import com.my.model.Order;
+import com.my.common.BaseEntityDao;
 
 @Local
-public interface OrderDaoBeanLocal{
-	public void saveOrder(Order order);
-	public Order findByOrderId(String orderid);
-	public void updateOrder(Order order);
+public interface OrderDaoBeanLocal extends BaseEntityDao{
+
 }
