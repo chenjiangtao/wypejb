@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Class-Path: MyEJB3JPAStudyPo.jar MyEJB3JPAStudyInterface.jar
+Class-Path: MyEJB3JPAStudyInterface.jar
 

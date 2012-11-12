@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import com.my.dao.local.OrderDaoBeanLocal;
 import com.my.model.Order;
 
@@ -11,12 +13,23 @@ import com.my.model.Order;
 public class OrderServiceBean implements OrderServiceBeanRemote{
 	@EJB (beanName="OrderDaoBean")OrderDaoBeanLocal orderDaoBeanLocal;
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void saveOrder(Map<String, String> data) {
 		Order order = new Order();
 		order.setOrderid(data.get("orderid"));
 		order.setAmount(new BigDecimal(data.get("amount")));
-		orderDaoBeanLocal.insert(order);
+		try {
+			orderDaoBeanLocal.insert(order);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 		order.setTrace(data.get("trace"));
-		orderDaoBeanLocal.update(order);
+		try {
+			orderDaoBeanLocal.update(order);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

@@ -1,5 +1,15 @@
 【事务控制】
 
+【关于分包引起的进一步问题】
+因为po类没有放到业务工程中，在ejb持久化的是时候出现无法识别po的现象报错
+Unknown entity: com.my.model.Order
+所以现在改成po和业务处理类必须放在一起，只把需要暴露的remote接口放在接口工程中
+
+META-INF\MANIFEST.MF加载依赖包的方式依然有效
+
+接口工程中只放remote接口和client与server端都需要的实体类，但是这个实体类不能是需要持久化的po类
+
+
 【对于Dao只提供local接口，不提供remote】
 
 【db2中char做主键的OneToMany问题】

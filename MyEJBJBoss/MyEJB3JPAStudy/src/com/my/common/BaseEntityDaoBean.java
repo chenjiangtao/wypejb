@@ -12,7 +12,12 @@ public abstract class BaseEntityDaoBean {
 	@PersistenceContext(unitName="MyTestEJBPU") protected EntityManager em;
 	
 	public void insert(Object entity) {
-		em.persist(entity);
+		try {
+			em.persist(entity);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 	public void update(Object entity) {

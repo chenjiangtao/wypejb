@@ -11,7 +11,12 @@ import com.umpay.model.MsgEntity;
 public class MsgEntityDaoBean implements MsgEntiryDaoBeanLocal  {
 	@PersistenceContext(unitName="MyTestEJBPU") protected EntityManager em;
 	public void add(Object entity) {
-		em.persist(entity);
+		try {
+			em.persist(entity);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	public Object find(String rpid) {
 		return em.find(MsgEntity.class, rpid);
