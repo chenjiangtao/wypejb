@@ -1,5 +1,16 @@
 【自定义bean名称】
+session bean实现类注释规范
+===================================================================================
+@Stateless(name="ReceiveParamServiceBean")	//远程调用时ctx.lookup("ReceiveParamServiceBean/remote")
+@Remote(ReceiveParamService.class)			//可以放到ReceiveParamService类中，但是为了不暴露信息，建议放到实现类
+public class ReceiveParamBean implements ReceiveParamService{
+===================================================================================
+
 【EJB远程调用参数规划】
+为了po信息的安全行，一般不对外公开po类，remote请求使用map来传递接口，这里封装两个类用于传递接口
+RequestMsg
+ResponseMsg
+这两个类中各自都包含一个map对象，用于传递具体业务参数
 
 【事务控制】
 事务配置一般是在service层bean的方法上配置，但是默认是有事务的，也就是说即是不在方法上加注释
