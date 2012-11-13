@@ -1,3 +1,10 @@
+【消息引擎】
+
+【EJB的集群配置@Clustered，有时间在研究】
+【】
+【调用本地session bean(local)】
+【拦截器】
+
 【自定义bean名称】
 session bean实现类注释规范
 ===================================================================================
@@ -13,6 +20,9 @@ ResponseMsg
 这两个类中各自都包含一个map对象，用于传递具体业务参数
 
 【事务控制】
+@TransactionManagement(TransactionManagementType.CONTAINER)默认使用容器管理，虽然是默认值，但是最好将注释写出来
+@TransactionManagement(TransactionManagementType.BEAN) bean管理事务，可以控制事务提交的边界，没有研究
+
 事务配置一般是在service层bean的方法上配置，但是默认是有事务的，也就是说即是不在方法上加注释
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 也是可以的，如果想不使用事务，则需要这样配置
