@@ -15,12 +15,23 @@ public class TestOrderService extends BaseTestEJB{
 
 	public void testSaveOrder() {
 		try {
-			
 			Map<String, String> orderData = new HashMap<String, String>();
-			orderData.put("orderid", "R121112161731002");
+			orderData.put("orderid", "R121113161731102");
 			orderData.put("amount", "100");
-			orderData.put("trace", "T1211121617310022");
+			orderData.put("trace", "T1211131617311022");
 			orderService.saveOrder(orderData);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void utestSaveOrderNT() {
+		try {
+			Map<String, String> orderData = new HashMap<String, String>();
+			orderData.put("orderid", "R121113161731002");
+			orderData.put("amount", "100");
+			orderData.put("trace", "T1211131617310022");
+			orderService.saveOrderNT(orderData);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}

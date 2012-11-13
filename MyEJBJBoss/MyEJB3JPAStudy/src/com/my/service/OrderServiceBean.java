@@ -13,8 +13,16 @@ import com.my.model.Order;
 public class OrderServiceBean implements OrderServiceBeanRemote{
 	@EJB (beanName="OrderDaoBean")OrderDaoBeanLocal orderDaoBeanLocal;
 	
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void saveOrder(Map<String, String> data) {
+		saveOrderProcess(data);
+	}
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void saveOrderNT(Map<String, String> data) {
+		saveOrderProcess(data);
+	}
+	
+	private void saveOrderProcess(Map<String, String> data) {
 		Order order = new Order();
 		order.setOrderid(data.get("orderid"));
 		order.setAmount(new BigDecimal(data.get("amount")));
