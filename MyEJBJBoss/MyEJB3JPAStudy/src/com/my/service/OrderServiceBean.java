@@ -22,6 +22,10 @@ public class OrderServiceBean implements OrderServiceBeanRemote{
 		saveOrderProcess(data);
 	}
 	
+	public void saveOrderDefault(Map<String, String> data) {
+		saveOrderProcess(data);
+	}
+	
 	private void saveOrderProcess(Map<String, String> data) {
 		Order order = new Order();
 		order.setOrderid(data.get("orderid"));
@@ -40,4 +44,5 @@ public class OrderServiceBean implements OrderServiceBeanRemote{
 			throw e;
 		}
 	}
+
 }

@@ -1,4 +1,19 @@
+【自定义bean名称】
+【EJB远程调用参数规划】
+
 【事务控制】
+事务配置一般是在service层bean的方法上配置，但是默认是有事务的，也就是说即是不在方法上加注释
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+也是可以的，如果想不使用事务，则需要这样配置
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+
+以下是事务配置参数：只研究了其中的两个：REQUIRED、NOT_SUPPORTED，其他待研究
+1.REQUIRED
+2.MANDATORY
+3.REQUIRESNEW
+4.SUPPORTS
+5.NOT_SUPPORTED
+6.Never
 
 【关于分包引起的进一步问题】
 因为po类没有放到业务工程中，在ejb持久化的是时候出现无法识别po的现象报错

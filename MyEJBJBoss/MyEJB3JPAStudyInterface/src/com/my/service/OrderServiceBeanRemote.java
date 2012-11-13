@@ -7,4 +7,5 @@ import javax.ejb.Remote;
 public interface OrderServiceBeanRemote{
 	public void saveOrder(Map<String, String> data);
 	public void saveOrderNT(Map<String, String> data);
+	public void saveOrderDefault(Map<String, String> data);
 }

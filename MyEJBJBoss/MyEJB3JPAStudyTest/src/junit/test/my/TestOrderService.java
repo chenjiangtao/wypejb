@@ -13,7 +13,7 @@ public class TestOrderService extends BaseTestEJB{
 		orderService = (OrderServiceBeanRemote)ctx.lookup("OrderServiceBean/remote");
 	}
 
-	public void testSaveOrder() {
+	public void utestSaveOrder() {
 		try {
 			Map<String, String> orderData = new HashMap<String, String>();
 			orderData.put("orderid", "R121113161731102");
@@ -32,6 +32,18 @@ public class TestOrderService extends BaseTestEJB{
 			orderData.put("amount", "100");
 			orderData.put("trace", "T1211131617310022");
 			orderService.saveOrderNT(orderData);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void testSaveOrderDefault() {
+		try {
+			Map<String, String> orderData = new HashMap<String, String>();
+			orderData.put("orderid", "R121113161731010");
+			orderData.put("amount", "100");
+			orderData.put("trace", "T121113161731010");
+			orderService.saveOrderDefault(orderData);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
