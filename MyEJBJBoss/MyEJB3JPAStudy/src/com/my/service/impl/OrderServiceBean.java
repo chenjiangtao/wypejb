@@ -1,4 +1,4 @@
-package com.my.service;
+package com.my.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -10,6 +10,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import com.my.dao.local.OrderDaoBeanLocal;
 import com.my.model.Order;
+import com.my.service.OrderServiceBeanRemote;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)

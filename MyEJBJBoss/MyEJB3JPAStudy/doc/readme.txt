@@ -1,8 +1,13 @@
 【消息引擎】
 
 【EJB的集群配置@Clustered，有时间在研究】
-【】
+
 【调用本地session bean(local)】
+在一个bean使用另一个bean需要使用注解的方式注入，用到（@EJB）
+@EJB(beanName="EjbInvokeService") private EjbInvokeLocal ejbInvokeLocal;
+@EJB private EjbInvokeLocal ejbInvokeLocal;
+这两种方式都可以注入，结果是一样的，前者清晰的给出beanName，后者省略
+private也可以省略默认是包内访问
 
 【ContextManager-ThreadLocal使用，有时间详细解释】
 

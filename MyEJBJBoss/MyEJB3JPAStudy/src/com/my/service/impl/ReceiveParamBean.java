@@ -1,17 +1,20 @@
-package com.my.service;
+package com.my.service.impl;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import com.my.interceptor.LoggerInterceptor;
 import com.my.model.RequestMsg;
 import com.my.model.ResponseMsg;
+import com.my.service.ReceiveParamService;
+import com.my.service.local.EjbInvokeLocal;
 
 @Stateless(name="ReceiveParamServiceBean")
 @Remote(ReceiveParamService.class)
 @Interceptors(LoggerInterceptor.class)
 public class ReceiveParamBean implements ReceiveParamService{
-
+	@EJB(beanName="EjbInvokeService") private EjbInvokeLocal ejbInvokeLocal;
 	public ResponseMsg transformMsg(RequestMsg reqMsg) {
 		System.out.println(reqMsg.toString());
 		ResponseMsg resMsg = new ResponseMsg();
@@ -26,6 +29,9 @@ public class ReceiveParamBean implements ReceiveParamService{
 		retMsg.setRetCode("0000");
 		retMsg.setRetMsg("SUCCESS");
 		retMsg.setCurTime(System.currentTimeMillis());
+	}
+	public ResponseMsg transformMsgEjbInvokeBean(RequestMsg reqMsg) {
+		return ejbInvokeLocal.invokeMethodLocal(reqMsg);
 	}
 
 }

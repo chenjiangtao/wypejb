@@ -14,7 +14,7 @@ public class TestReceiveService extends BaseTestEJB{
 		receiveParamService = (ReceiveParamService)ctx.lookup("ReceiveParamServiceBean/remote");
 	}
 	
-	public void testMsgTransform() {
+	public void utestMsgTransform() {
 		RequestMsg reqMsg = new RequestMsg();
 		reqMsg.setReqDate("20121113");
 		reqMsg.setReqTime("102314");
@@ -33,6 +33,16 @@ public class TestReceiveService extends BaseTestEJB{
 		ResponseMsg retMsg = new ResponseMsg();
 		retMsg.setRetCode("1010");
 		receiveParamService.transformMsgNoReturn(reqMsg, retMsg);
+		System.out.println(retMsg);
+	}
+	
+	public void testMsgTransformEjbInvoke() {
+		RequestMsg reqMsg = new RequestMsg();
+		reqMsg.setReqDate("20121113");
+		reqMsg.setReqTime("102314");
+		reqMsg.setRpid("rpid000001");
+		reqMsg.putParamValue("orderid", "000001");
+		ResponseMsg retMsg = receiveParamService.transformMsgEjbInvokeBean(reqMsg);
 		System.out.println(retMsg);
 	}
 }
