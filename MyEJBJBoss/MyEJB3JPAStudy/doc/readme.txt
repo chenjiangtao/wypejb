@@ -3,7 +3,26 @@
 【EJB的集群配置@Clustered，有时间在研究】
 【】
 【调用本地session bean(local)】
+
+【ContextManager-ThreadLocal使用，有时间详细解释】
+
+【日志配置】
+jboss统一有配置文件，所以log4j的配置需要放在jboss-4.2.2.GA\server\default\conf\jboss-log4j.xml进行添加
+doc中保存了本地的配置，仅供参考
+在本工程中使用两个logger类：MyLogger、MyDetailLogger，区别在于
+MyLogger无法打印类名
+MyDetailLogger可以打印类名
+如何使用见LoggerInterceptor类
+
 【拦截器】
+使用类的方式作为拦截器，只需要将新建一个类，定义类似下面的方法，方法名不限，并加上注释即可
+public class LoggerInterceptor{
+	@AroundInvoke
+	public Object interceptorMethod(InvocationContext ctx) throws Exception{
+
+使用的时候只需要在session bean的时候
+@Interceptors(LoggerInterceptor.class)
+public class ReceiveParamBean implements ReceiveParamService{
 
 【自定义bean名称】
 session bean实现类注释规范

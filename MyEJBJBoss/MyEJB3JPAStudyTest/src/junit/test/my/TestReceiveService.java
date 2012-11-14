@@ -23,4 +23,16 @@ public class TestReceiveService extends BaseTestEJB{
 		ResponseMsg retMsg = receiveParamService.transformMsg(reqMsg);
 		System.out.println(retMsg);
 	}
+	
+	public void utestMsgTransformNoReturn() {
+		RequestMsg reqMsg = new RequestMsg();
+		reqMsg.setReqDate("20121113");
+		reqMsg.setReqTime("102314");
+		reqMsg.setRpid("rpid000001");
+		reqMsg.putParamValue("orderid", "000001");
+		ResponseMsg retMsg = new ResponseMsg();
+		retMsg.setRetCode("1010");
+		receiveParamService.transformMsgNoReturn(reqMsg, retMsg);
+		System.out.println(retMsg);
+	}
 }
