@@ -7,6 +7,7 @@ import javax.interceptor.Interceptors;
 import com.my.interceptor.LoggerInterceptor;
 import com.my.model.RequestMsg;
 import com.my.model.ResponseMsg;
+import com.my.service.EjbInvokeRemote;
 import com.my.service.ReceiveParamService;
 import com.my.service.local.EjbInvokeLocal;
 
@@ -15,6 +16,7 @@ import com.my.service.local.EjbInvokeLocal;
 @Interceptors(LoggerInterceptor.class)
 public class ReceiveParamBean implements ReceiveParamService{
 	@EJB(beanName="EjbInvokeService") private EjbInvokeLocal ejbInvokeLocal;
+	@EJB(beanName="EjbInvokeService") private EjbInvokeRemote ejbInvokeRemote;
 	public ResponseMsg transformMsg(RequestMsg reqMsg) {
 		System.out.println(reqMsg.toString());
 		ResponseMsg resMsg = new ResponseMsg();
@@ -30,8 +32,11 @@ public class ReceiveParamBean implements ReceiveParamService{
 		retMsg.setRetMsg("SUCCESS");
 		retMsg.setCurTime(System.currentTimeMillis());
 	}
-	public ResponseMsg transformMsgEjbInvokeBean(RequestMsg reqMsg) {
+	public ResponseMsg transformMsgEjbInvokeLocalBean(RequestMsg reqMsg) {
 		return ejbInvokeLocal.invokeMethodLocal(reqMsg);
+	}
+	public ResponseMsg transformMsgEjbInvokeRemoteBean(RequestMsg reqMsg) {
+		return ejbInvokeRemote.invokeMethodRemote(reqMsg);
 	}
 
 }

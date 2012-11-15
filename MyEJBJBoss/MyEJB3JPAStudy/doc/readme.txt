@@ -1,3 +1,6 @@
+【容器加载，使得jboss一起动就加载】
+wensheng说要集成quartz，所以暂时不考虑研究
+
 【定时器】
 Timer有两种，一种是single-event timers，另一种是interval timers。
 single-event timers在它的生命周期中只产生一次timeout
@@ -19,12 +22,12 @@ for (Timer timer : timers) {
 }
 
 详细分析：
-当调用createTimer时，jboss会将定时器作为记录插入到hsqldb内存数据库并把数据存储于硬盘，通过执行下面的命令，可以查看
+当调用createTimer时，jboss会将定时器作为记录插入到【hsqldb】内存数据库并把数据存储于硬盘，通过执行下面的命令，可以查看
 这也就是为什么第一次调用createTimer，以后都不需要在调用了，只要jar部署好，jboss一起动，就会开始执行
 查看数据库（前提是jboss服务已经停止，否则无法打开）
 java -cp E:\wypsmall\Develop\jboss-4.2.2.GA\server\default\lib\hsqldb.jar org.hsqldb.util.DatabaseManager -url jdbc:hsqldb:E:/wypsmall/Develop/jboss-4.2.2.GA/server/default/data/hypersonic/localDB
 
-当调用cancel时，jboss会将改定时器记录从数据库中删除，同样可以通过查看数据库来验证
+当调用cancel时，jboss会将改定时器记录从数据库中删除，同样可以通过查看数据库来验证（也可以手工删除，使用sql语句delete）
 
 下面试验两个场景
 场景1：连续调用两次createTimer，看看数据库记录是不是插入两条
@@ -39,6 +42,20 @@ http://blog.csdn.net/itm_hadf/article/details/7685398
 dbQueue-service.xml拷贝到E:\wypsmall\Develop\jboss-4.2.2.GA\server\default\deploy
 首先配置一个队列，然后在创建一个监听器，就可以实现消息驱动了，队列用来保存消息，监听器用来处理消息，完成异步操作
 具体请参考MyQueueMessageListener
+
+根据timer经验验证以下消息存放的地方，是不是也是【hsqldb】
+使用测试类向服务器发送消息，停止jboss，通过管理器查看hsqldb（select * from jms_messages）发现记录已经保存在数据库中，前提是停止监听
+注释掉监听器配置
+/*
+@MessageDriven(activationConfig = {  
+	@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),  
+	@ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/myQueue"),  
+	// 当我们使用的是容器来管理事务的时候，acknowledgeMode这个属性设置也没什么意义，    
+	// 这里可以省略掉 自动确认模式，也可以不要，。   
+	@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
+})  
+*/
+如果重新启动监听器，然后启动jboss，之前的消息会先被处理
 
 【EJB的集群配置@Clustered，有时间在研究】
 

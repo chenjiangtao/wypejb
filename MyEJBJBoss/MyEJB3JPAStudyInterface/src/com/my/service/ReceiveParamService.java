@@ -7,5 +7,6 @@ import com.my.model.ResponseMsg;
 public interface ReceiveParamService{
 	public ResponseMsg transformMsg(RequestMsg reqMsg);
 	public void transformMsgNoReturn(RequestMsg reqMsg, ResponseMsg retMsg);
-	public ResponseMsg transformMsgEjbInvokeBean(RequestMsg reqMsg);
+	public ResponseMsg transformMsgEjbInvokeLocalBean(RequestMsg reqMsg);
+	public ResponseMsg transformMsgEjbInvokeRemoteBean(RequestMsg reqMsg);
 }

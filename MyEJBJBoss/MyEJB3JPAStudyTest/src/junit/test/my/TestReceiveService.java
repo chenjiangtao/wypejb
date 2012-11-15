@@ -42,7 +42,9 @@ public class TestReceiveService extends BaseTestEJB{
 		reqMsg.setReqTime("102314");
 		reqMsg.setRpid("rpid000001");
 		reqMsg.putParamValue("orderid", "000001");
-		ResponseMsg retMsg = receiveParamService.transformMsgEjbInvokeBean(reqMsg);
+		ResponseMsg retMsg = receiveParamService.transformMsgEjbInvokeLocalBean(reqMsg);
+		System.out.println(retMsg);
+		retMsg = receiveParamService.transformMsgEjbInvokeRemoteBean(reqMsg);
 		System.out.println(retMsg);
 	}
 }

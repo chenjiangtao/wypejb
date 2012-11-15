@@ -2,6 +2,7 @@ package com.my.service.impl;
 
 import java.util.Collection;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -42,5 +43,6 @@ public class MyTimerBean implements MyTimerBeanRemote{
 			}
 		}
 	}
+
 
 }
