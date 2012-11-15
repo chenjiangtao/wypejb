@@ -1,4 +1,44 @@
+【定时器】
+Timer有两种，一种是single-event timers，另一种是interval timers。
+single-event timers在它的生命周期中只产生一次timeout
+interval timers可以在每经过一段时间间隔后产生一次timeout
+
+文章转载自网管之家：http://www.bitscn.com/pdb/java/200605/22160.html
+ejb的定时服务是创建一个timer，设置执行的时间间隔然后定制执行，参考例子MyTimerBean
+首先创建一个session bean由于创建和取消定时服务
+创建定时服务，需要使用ejb中的TimerService，通过注释的方式注入
+@Resource       
+private TimerService timerService;
+创建时使用
+timerService.createTimer(new Date(new Date().getTime()+milliseconds),milliseconds,timerName);
+取消时使用（自己编写）
+Collection<Timer> timers = timerService.getTimers();
+for (Timer timer : timers) {
+	if(timerName.equals(timer.getInfo()))
+		timer.cancel();
+}
+
+详细分析：
+当调用createTimer时，jboss会将定时器作为记录插入到hsqldb内存数据库并把数据存储于硬盘，通过执行下面的命令，可以查看
+这也就是为什么第一次调用createTimer，以后都不需要在调用了，只要jar部署好，jboss一起动，就会开始执行
+查看数据库（前提是jboss服务已经停止，否则无法打开）
+java -cp E:\wypsmall\Develop\jboss-4.2.2.GA\server\default\lib\hsqldb.jar org.hsqldb.util.DatabaseManager -url jdbc:hsqldb:E:/wypsmall/Develop/jboss-4.2.2.GA/server/default/data/hypersonic/localDB
+
+当调用cancel时，jboss会将改定时器记录从数据库中删除，同样可以通过查看数据库来验证
+
+下面试验两个场景
+场景1：连续调用两次createTimer，看看数据库记录是不是插入两条
+验证结果：会向数据库插入两条记录，并且两个定时服务都会执行
+
+场景2：我想改变原有定时器执行的时间间隔，应该如何解决
+根据目前使用的经验，如果想改变定时器执行时间间隔，只能删除原来的，重新创建
+
 【消息引擎】
+http://blog.csdn.net/itm_hadf/article/details/7685398
+
+dbQueue-service.xml拷贝到E:\wypsmall\Develop\jboss-4.2.2.GA\server\default\deploy
+首先配置一个队列，然后在创建一个监听器，就可以实现消息驱动了，队列用来保存消息，监听器用来处理消息，完成异步操作
+具体请参考MyQueueMessageListener
 
 【EJB的集群配置@Clustered，有时间在研究】
 
