@@ -30,7 +30,7 @@ read时如果返回值不为-1表示未读取完成，公司提供的jar只读�
 【修改bug】
 工程：MyEJB3JPAStudy
 E:\wypsmall\Code\Code_Myeclipse\MyEJB3JPAStudy\src\com\my\utils\SpayMySignUtil.java
-工程：UPayService
+工程：UPayService 【经验证我的方式正确，业务可以正常处理】
 E:\wypsmall\Code\Code_Myeclipse\UPayService\src\com\umpay\gdupay\util\SpayMySignUtil.java
 
 【未修复次bug】
@@ -42,6 +42,19 @@ E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MagPlat\src\plat\com\umpay\gdPay\ut
 工程：MixPayService
 E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayService\src\com\umpay\mixpay\util\SpaySignUtil.java
 ***************************************************************
+
+【公司以下jar存在问题】
+E:\wypsmall\Code\Code_Myeclipse\MyNetWork\lib\Signuilt.jar
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayWeb\WebRoot\WEB-INF\lib\sign.jar
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayWeb\WebRoot\WEB-INF\lib\plweb.jar
+工程：MixPayService
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayService\src\com\umpay\mixpay\util\WbankSignUtil.java
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayService\src\com\umpay\mixpay\util\WyPaySignUtil.java
+工程：MixPayWeb
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayWeb
+有大量这样的写法，只要你搜索SignUtil.genPrivateKey(
+in = this.getClass().getClassLoader().getResourceAsStream(platKey);
+in.read(key);
 
 【容器加载，使得jboss一起动就加载】
 wensheng说要集成quartz，所以暂时不考虑研究
