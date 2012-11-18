@@ -10,6 +10,7 @@ import com.my.model.ResponseMsg;
 import com.my.service.EjbInvokeRemote;
 import com.my.service.ReceiveParamService;
 import com.my.service.local.EjbInvokeLocal;
+import com.my.utils.SpayMySignUtil;
 
 @Stateless(name="ReceiveParamServiceBean")
 @Remote(ReceiveParamService.class)
@@ -36,6 +37,7 @@ public class ReceiveParamBean implements ReceiveParamService{
 		return ejbInvokeLocal.invokeMethodLocal(reqMsg);
 	}
 	public ResponseMsg transformMsgEjbInvokeRemoteBean(RequestMsg reqMsg) {
+		SpayMySignUtil.main(null);
 		return ejbInvokeRemote.invokeMethodRemote(reqMsg);
 	}
 

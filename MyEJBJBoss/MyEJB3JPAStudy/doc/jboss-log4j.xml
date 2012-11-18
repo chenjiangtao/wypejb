@@ -84,6 +84,15 @@
         <param name="ConversionPattern" value="%d %-5p [%c{1}] (%t:%x) %m%n"/>
       </layout>
    </appender>
+   <appender name="umpay_log" class="org.jboss.logging.appender.DailyRollingFileAppender">
+      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+      <param name="File" value="${jboss.server.log.dir}/umpay_detail.log"/>
+      <param name="Append" value="true"/>
+      <param name="DatePattern" value="'.'yyyyMMddHH"/>  
+      <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d %-5p [%c{1}] (%t:%x) %m%n"/>
+      </layout>
+   </appender>
    <!-- Buffer events and log them asynchronously
    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
@@ -329,6 +338,10 @@
 		<logger name="simpleLog">
 			<level value="DEBUG" />
 			<appender-ref ref="my_log"/>
+		</logger>
+		<logger name="com.umpay">
+			<level value="DEBUG" />
+			<appender-ref ref="umpay_log"/>
 		</logger>
    <!-- ======================= -->
    <!-- Setup the Root category -->
