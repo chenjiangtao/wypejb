@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project name="UPayService" default="deploy" basedir=".."> 
+	
+	<property name="service.dir" value="${basedir}/UPayService" /> 
+	<property name="interface.dir" value="${basedir}/UPayInterface" />
+	<property name="service.src.dir" value="${service.dir}/src" /> 
+	<property name="service.db.dir" value="${service.dir}/db" /> 
+	<property name="interface.src.dir" value="${interface.dir}/src"/>
+	<property name="build.dir" value="${service.dir}/build" /> 
+	<property name="service.classes.dir" value="${build.dir}/service/classes" /> 
+	<property name="interface.classes.dir" value="${build.dir}/interface/classes" /> 
+	<property name="deploy.dir" value="${build.dir}/deploy" />
+	<property name="jboss.home" value="E:/wypsmall/Develop/jboss-4.2.3.GA" />
+	
+	<!-- Build classpath --> 
+	<path id="service.classpath"> 
+		<fileset dir="${service.dir}/lib" includes="*.jar" /> 
+		<pathelement location="${service.classes.dir}"/>
+	</path>
+	<path id="interface.classpath">
+		<pathelement location="${interface.classes.dir}"/>
+		<fileset dir="${interface.dir}/lib" includes="*.jar" />
+	</path>
+	
+	<!-- =================================================================== --> 
+	<!-- Cleans up generated stuff                                           --> 
+	<!-- =================================================================== --> 
+	<target name="clean"> 
+		<delete dir="${build.dir}" /> 
+		<delete dir="${deploy.dir}" /> 
+	</target> 
+	
+	<!-- =================================================================== --> 
+	<!-- Prepares the build directory                                        --> 
+	<!-- =================================================================== --> 
+	<target name="prepare" depends="clean"> 
+		<mkdir dir="${build.dir}" /> 
+		<mkdir dir="${service.classes.dir}" /> 
+		<mkdir dir="${interface.classes.dir}" /> 
+		<mkdir dir="${deploy.dir}" /> 
+	</target> 
+	
+	<target name="complie_interface" depends="prepare" description="编译接口">
+		<javac srcdir="${interface.src.dir}" destdir="${interface.classes.dir}" debug="true" encoding="gbk">
+			<classpath refid="interface.classpath" />
+		</javac>
+	</target>
+	
+	
+	<!-- =================================================================== --> 
+	<!-- Compiles the source code                                            --> 
+	<!-- =================================================================== --> 
+	<target name="compile" depends="complie_interface" description="compile"> 
+		<javac srcdir="${service.src.dir}" destdir="${service.classes.dir}" debug="true" encoding="gbk" > 
+			<classpath refid="interface.classpath" />
+			<classpath refid="service.classpath" /> 
+			<exclude name="test/**/*.*" /> 
+		</javac> 
+	</target> 
+	
+	<target name="interfacejar" depends="compile" description="创建接口发布包">
+		<jar jarfile="${deploy.dir}/upayInterface.jar">
+			<fileset dir="${interface.classes.dir}">
+				<include name="com/**/*.class"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="servicejar" depends="interfacejar" description="创建EJB发布包">
+		<copy todir="${service.classes.dir}/cert">
+			<fileset dir="${service.src.dir}/cert">
+				<include name="*.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${service.classes.dir}/META-INF">
+			<fileset dir="${service.src.dir}/META-INF">
+				<include name="*.*"/>
+			</fileset>
+		</copy>
+		<jar jarfile="${deploy.dir}/upayService.jar"> 
+			<fileset dir="${service.classes.dir}"> 
+				<include name="com/**/*.class" /> 
+				<include name="cert/*.*" />
+			</fileset> 
+			<metainf dir="${service.src.dir}/META-INF"> 
+				<include name="**" /> 
+			</metainf> 
+		</jar>
+	</target> 
+	
+	<target name="deploy" depends="servicejar"> 
+		<copy todir="${jboss.home}/server/default/deploy/upayService.jar">
+			<fileset dir="${service.classes.dir}">
+			</fileset>
+		</copy>
+		<copy todir="${jboss.home}/server/default/deploy/upayInterface.jar">
+			<fileset dir="${interface.classes.dir}">
+			</fileset>
+		</copy>			
+		<copy file="${service.dir}/config/spay_config.properties" todir="${jboss.home}/server/default/conf" />
+	</target> 
+	
+</project> 
