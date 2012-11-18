@@ -50,10 +50,10 @@ public class MySignUtil{
 	        {
 	            Signature sig = Signature.getInstance("SHA1withRSA");
 	            sig.initSign(pk);
-	            System.out.println(Arrays.toString(data));
+	            //System.out.println(Arrays.toString(data));
 	            sig.update(data);
 	            sb = sig.sign();
-	            System.out.println(Arrays.toString(sb));
+	            //System.out.println(Arrays.toString(sb));
 	        }
 	        catch(Exception e)
 	        {

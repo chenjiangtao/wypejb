@@ -10,6 +10,7 @@ import com.my.model.ResponseMsg;
 import com.my.service.EjbInvokeRemote;
 import com.my.service.ReceiveParamService;
 import com.my.service.local.EjbInvokeLocal;
+import com.my.utils.ReadFileFromJarHelper;
 import com.my.utils.SpayMySignUtil;
 
 @Stateless(name="ReceiveParamServiceBean")
@@ -34,9 +35,13 @@ public class ReceiveParamBean implements ReceiveParamService{
 		retMsg.setCurTime(System.currentTimeMillis());
 	}
 	public ResponseMsg transformMsgEjbInvokeLocalBean(RequestMsg reqMsg) {
+		//用来测试读取王阿尼教案
+		ReadFileFromJarHelper.readFile();
+		ReadFileFromJarHelper.readFileBuffer();
 		return ejbInvokeLocal.invokeMethodLocal(reqMsg);
 	}
 	public ResponseMsg transformMsgEjbInvokeRemoteBean(RequestMsg reqMsg) {
+		//用来测试读取证书文件
 		SpayMySignUtil.main(null);
 		return ejbInvokeRemote.invokeMethodRemote(reqMsg);
 	}

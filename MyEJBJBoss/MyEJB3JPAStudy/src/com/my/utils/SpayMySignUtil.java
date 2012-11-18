@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 public class SpayMySignUtil{
 	private static Logger log = Logger.getLogger(SpayMySignUtil.class);
 
-	private static byte[] key = new byte[634]; //634
+	private static byte[] key = new byte[20480]; //634
 	
 	private static byte[] spCert = new byte[20480];
 	
@@ -68,13 +68,13 @@ public class SpayMySignUtil{
     		InputStream in = null;
     		try{
     			in = PropsUtil.class.getClassLoader().getResourceAsStream(keyPath);
-    			in.read(key, 0, 634);
+    			in.read(key);
 //    			URL url= PropsUtil.class.getClassLoader().getSystemResource(keyPath);
 //    			File file = new File(url.getPath());
 //    			in = new FileInputStream(file);
 //    			in.read(key);
 //    			System.out.println(url);
-    			System.out.println("-file--"+Arrays.toString(key));
+//    			System.out.println("-file--"+Arrays.toString(key));
     			
     			curKeyFileName = keyPath;
     		}catch(Exception e){
