@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
-import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /** 
@@ -26,6 +25,8 @@ public class SpayMySignUtil{
 	
 	private static byte[] spCert = new byte[20480];
 	
+	private static int readSize = 512;
+	
 	private static String curCertFileName;
 	
 	private static String curKeyFileName;
@@ -39,9 +40,16 @@ public class SpayMySignUtil{
     	String certPath = PropsUtil.getMessage("SPAY4.platPublicKey");
     	if(!certPath.equals(curCertFileName)){
     		InputStream in = null;
+    		int count = 0;
+    		int seek = 0;
+    		byte[] buffer = new byte[readSize];
     		try{
     			in = PropsUtil.class.getClassLoader().getResourceAsStream(certPath);
-    			in.read(spCert);
+    			//in.read(spCert);
+    			while((count = in.read(buffer))!= -1){
+    				System.arraycopy(buffer, 0, spCert, seek, count);
+    				seek += count;
+                }
     			curCertFileName = certPath;
     		}catch(Exception e){
     			log.error(e);
@@ -66,9 +74,16 @@ public class SpayMySignUtil{
     	System.out.println("aa"+keyPath);
     	if(!keyPath.equals(curKeyFileName)){
     		InputStream in = null;
+    		int count = 0;
+    		int seek = 0;
+    		byte[] buffer = new byte[readSize];
     		try{
     			in = PropsUtil.class.getClassLoader().getResourceAsStream(keyPath);
-    			in.read(key);
+//    			in.read(key);
+    			while((count = in.read(buffer))!= -1){
+    				System.arraycopy(buffer, 0, key, seek, count);
+    				seek += count;
+                }  
 //    			URL url= PropsUtil.class.getClassLoader().getSystemResource(keyPath);
 //    			File file = new File(url.getPath());
 //    			in = new FileInputStream(file);

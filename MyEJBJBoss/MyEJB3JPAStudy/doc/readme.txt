@@ -27,6 +27,21 @@ file.txt如何读取都是正确的
 in = PropsUtil.class.getClassLoader().getResourceAsStream(keyPath);
 in.read(key);
 read时如果返回值不为-1表示未读取完成，公司提供的jar只读取一次，如果一次无法读取整个文件那么证书就不完成，造成签名失败
+【修改bug】
+工程：MyEJB3JPAStudy
+E:\wypsmall\Code\Code_Myeclipse\MyEJB3JPAStudy\src\com\my\utils\SpayMySignUtil.java
+工程：UPayService
+E:\wypsmall\Code\Code_Myeclipse\UPayService\src\com\umpay\gdupay\util\SpayMySignUtil.java
+
+【未修复次bug】
+工程：gdDemo
+E:\wypsmall\Code\Code_Myeclipse\gdDemo\src\java\com\umpay\gd\util\MySignUtil.java
+E:\wypsmall\Code\Code_Myeclipse\gdDemo\src\java\com\umpay\gd\util\WyPaySignUtil.java
+工程：MagPlat
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MagPlat\src\plat\com\umpay\gdPay\util\SpaySignUtil.java
+工程：MixPayService
+E:\wypsmall\Code\Code_Myeclipse\GdSettle_SVN\MixPayService\src\com\umpay\mixpay\util\SpaySignUtil.java
+***************************************************************
 
 【容器加载，使得jboss一起动就加载】
 wensheng说要集成quartz，所以暂时不考虑研究
