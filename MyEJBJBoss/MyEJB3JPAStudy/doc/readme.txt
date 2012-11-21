@@ -1,3 +1,20 @@
+【jboss使用db2代替 localDB.data实现jms的message持久化】
+http://blog.chinaunix.net/uid-20204000-id-1727702.html
+
+备份原配置文件
+E:\wypsmall\Develop\jboss-4.2.3.GA\server\default\deploy\jms\hsqldb-jdbc2-service.xml
+拷贝到
+E:\wypsmall\Develop\jboss-4.2.3.GA\docs\examples\jms
+
+新增db2配置文件
+E:\wypsmall\Develop\jboss-4.2.3.GA\docs\examples\jms\db2-jdbc2-service.xml
+拷贝到
+E:\wypsmall\Develop\jboss-4.2.3.GA\server\default\deploy\jms\
+并修改其内容，将其所有的表名加上schema：umpay
+
+详情参见：\MyEJB3JPAStudy\doc\db2-jdbc2-service.xml
+
+
 【读取jar资源文件少字节－2012-11-17】
 我将证书文件打包放入jar，但是通过
 in = PropsUtil.class.getClassLoader().getResourceAsStream(keyPath);
@@ -83,7 +100,7 @@ for (Timer timer : timers) {
 当调用createTimer时，jboss会将定时器作为记录插入到【hsqldb】内存数据库并把数据存储于硬盘，通过执行下面的命令，可以查看
 这也就是为什么第一次调用createTimer，以后都不需要在调用了，只要jar部署好，jboss一起动，就会开始执行
 查看数据库（前提是jboss服务已经停止，否则无法打开）
-java -cp E:\wypsmall\Develop\jboss-4.2.2.GA\server\default\lib\hsqldb.jar org.hsqldb.util.DatabaseManager -url jdbc:hsqldb:E:/wypsmall/Develop/jboss-4.2.2.GA/server/default/data/hypersonic/localDB
+java -cp E:\wypsmall\Develop\jboss-4.2.3.GA\server\default\lib\hsqldb.jar org.hsqldb.util.DatabaseManager -url jdbc:hsqldb:E:/wypsmall/Develop/jboss-4.2.3.GA/server/default/data/hypersonic/localDB
 
 当调用cancel时，jboss会将改定时器记录从数据库中删除，同样可以通过查看数据库来验证（也可以手工删除，使用sql语句delete）
 
