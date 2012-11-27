@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>DB2DS</jndi-name>
+    <connection-url>jdbc:db2://192.168.1.200:50000/develop</connection-url>
+    <driver-class>com.ibm.db2.jcc.DB2Driver</driver-class>
+    <user-name>wangyp</user-name>
+    <password>123456</password>
+    <min-pool-size>1</min-pool-size>
+    
+    <!-- New org.jboss.resource.adapter.jdbc.vendor.DB2ExceptionSorter 
+    
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.DB2ExceptionSorter</exception-sorter-class-name>
+    -->
+     
+    
+    <!-- sql to call when connection is created -->
+    <new-connection-sql>values (current timestamp)</new-connection-sql>
+    
+
+    <!-- sql to call on an existing pooled connection when it is obtained from pool -->
+    <check-valid-connection-sql>values (current timestamp)</check-valid-connection-sql>
+    
+
+  <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+    <metadata>
+       <type-mapping>DB2</type-mapping>
+    </metadata>
+  </local-tx-datasource>
+</datasources>
+
