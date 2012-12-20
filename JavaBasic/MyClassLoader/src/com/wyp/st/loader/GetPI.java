@@ -5,7 +5,7 @@
  * @author wangyunpeng
  * @version 1.0
  */
-package com.wyp.st;
+package com.wyp.st.loader;
 
 /**
  * desc: <p>创建人：wangyunpeng 创建日期：2012-12-19 </p>

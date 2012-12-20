@@ -5,7 +5,7 @@
  * @author wangyunpeng
  * @version 1.0
  */
-package com.wyp.st;
+package com.wyp.st.loader;
 
 import java.io.File;
 import java.io.FileInputStream;
