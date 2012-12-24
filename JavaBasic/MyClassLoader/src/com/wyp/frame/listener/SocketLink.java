@@ -8,11 +8,11 @@
 package com.wyp.frame.listener;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.net.Socket;
 
 /** 
@@ -29,7 +29,6 @@ public class SocketLink extends Thread{
 	 */
 	public SocketLink(Socket socket) {
 		this.socket = socket;
-		start();
 	}
 
 	@Override
@@ -43,13 +42,15 @@ public class SocketLink extends Thread{
 			writer.write("\r\n=>:");
 			writer.flush();
 			while((tempString=reader.readLine()) != null) {
-				if("quit".equals(tempString))
-					break;
-				writer.write("<=:");
-				System.out.println(tempString);
-				writer.write(tempString);
+				AdminCmd cmd = new AdminCmd(tempString);
+				boolean isExit = cmd.excuteCmd();
+				writer.write("=========================================================\r\n");
+				writer.write(cmd.getOutput());
+				writer.write("\r\n=========================================================");
 				writer.write("\r\n=>:");
 				writer.flush();
+				if(isExit)
+					break;
 			}
 			out.close();
 			in.close();
@@ -57,6 +58,34 @@ public class SocketLink extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isClosed() {
+		if(null != socket) {
+			return socket.isClosed();
+		} else {
+			return true;
+		}
+	}
+	
+	public void close() {
+		try {
+			if(socket != null)
+				socket.close();
+			socket = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			socket = null;
+		}
+	}
+
+	@Override
+	public String toString() {
+		if(socket != null)
+			return "[name:"+this.getName()+", ip:"+this.socket+"]";
+		else
+			return "[name:"+this.getName()+"]";
 	}
 	
 	

@@ -27,6 +27,7 @@ public class FileSystemClassLoader extends ClassLoader{
 	}
 
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
+		System.out.println("name:"+name);
 		byte[] classData = getClassData(name);
 		if (classData == null) {
 			throw new ClassNotFoundException();
@@ -37,6 +38,7 @@ public class FileSystemClassLoader extends ClassLoader{
 
 	private byte[] getClassData(String className) {
 		String path = classNameToPath(className);
+		System.out.println("path:"+path);
 		try {
 			InputStream ins = new FileInputStream(path);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();

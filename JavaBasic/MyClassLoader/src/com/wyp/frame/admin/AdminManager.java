@@ -19,6 +19,7 @@ public class AdminManager{
 	public static void main(String[] args) {
 		try {
 			AdminListener adminListener = new AdminListener();
+			adminListener.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
